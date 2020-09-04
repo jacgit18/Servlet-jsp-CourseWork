@@ -5,14 +5,14 @@ import java.io.*;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 // make sure use only lower case for address
 
-@WebServlet("/hello")
+//@WebServlet("/hello") // modern way to add path to url using xml is older way but is still used at companies
 public class HelloWorld extends HttpServlet {
 
 	@Override

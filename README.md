@@ -1,4 +1,4 @@
-# 01-servlet-jsp-CourseWork
+# 02-Servlet-jsp-CourseWork XML testing
 
 **Guide to Project**
 
