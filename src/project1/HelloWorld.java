@@ -21,7 +21,10 @@ public class HelloWorld extends HttpServlet {
 		throws ServletException, IOException{
 			
 		
+		// Always define response first
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		out.println("Hello World </B>");
 		out.println("<B> Hello World </B><BR>");
 		out.println("<H1>Hello World</H1>");
 
