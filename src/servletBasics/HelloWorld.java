@@ -1,4 +1,4 @@
-package project1;
+package servletBasics;
 
 import java.io.*;
 

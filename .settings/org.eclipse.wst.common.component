@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="XmlTest">
+    <wb-module deploy-name="exercises-basic">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/XmlTest/build/classes"/>
-        <property name="context-root" value="XmlTest"/>
+        <property name="java-output-path" value="/exercises-basic/build/classes"/>
+        <property name="context-root" value="exercises-basic"/>
     </wb-module>
 </project-modules>
