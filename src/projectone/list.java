@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/mylist")
+@WebServlet("/GetName")
 public class list extends HttpServlet{
 	
 	@Override
@@ -23,10 +23,7 @@ public class list extends HttpServlet{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String title = "JC";
-//		ServletUtilities tes = new ServletUtilities();
-//		out.println(tes);
-//		out.println(ServletUtilities.headWithTitle("The List")); // practicing what you did in class
-		
+
 		out.println("<!DOCTYPE html>");
         out.println("<head><title> Test </title></head>");
         out.println("<body>");
@@ -36,48 +33,7 @@ public class list extends HttpServlet{
         		
         		);
 
-//		out.println(ServletUtilities.headWithTitle("The List" +
-//				"<body bgcolor=\"#fdf5e6\">\n" +
-//				"<h1>" + title + "</h1>\n" +
-//				"<p>Simple servlet for testing.</p>\n" +
-//				"</body></html>"));
-        out.println("<div>");
-		out.println("<b>Joshua Carpentier</b></br>");
-		// String mylist = ""; always initialize if using variable inside for loop and after for loop
 
-//		 String[] myArray = new String[]{           
-//				 "<li>" + Math.random() + "</li>",
-//				 "<li>" + Math.random() + "</li>",
-//				 "<li>" + Math.random() + "</li>",
-//				 "<li>" + Math.random() + "</li>",
-// }; 
-
-        out.println("<ul>");
-//		for (int listIndex = 0; listIndex <= myArray.length; listIndex++)
-		for (int listIndex = 0; listIndex <= 3; listIndex++)
-        {
-            out.println("<li>" + Math.random() + "</li>");
-//            out.println(myArray[listIndex]);
-         }
-        out.println("</ul>");
-        out.println("</div>");
-        out.println("</br>");
-
-        out.println("<div>");
-		  out.println("<table border = '1'  width=700 height=700>");
-	        out.println("<tr>");
-
-	        for (int i = 0; i <= 25; i++)
-	        {
-	            for (int j = 0; j <= 10; j++)
-	            {
-	                out.println("<td height=10></td>");
-	            }
-	            out.println("</tr>");
-	        }
-
-	        out.println("</table>");
-	        out.println("</div>");
 
 	        
 	        out.println("</body></html>");
