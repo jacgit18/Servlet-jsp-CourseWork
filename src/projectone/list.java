@@ -30,6 +30,11 @@ public class list extends HttpServlet{
 		out.println("<!DOCTYPE html>");
         out.println("<head><title> Test </title></head>");
         out.println("<body>");
+        out.println(
+        		 request.getParameter("lastName") +
+        		 request.getParameter("firstName") 
+        		
+        		);
 
 //		out.println(ServletUtilities.headWithTitle("The List" +
 //				"<body bgcolor=\"#fdf5e6\">\n" +
