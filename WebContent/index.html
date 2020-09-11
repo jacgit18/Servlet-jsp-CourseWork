@@ -6,15 +6,18 @@
 </head>
 <body>
 	<H2 ALIGN="CENTER">A Sample Form Using GET</H2>
-	<FORM ACTION="GetName" METHOD="GET">
-		<CENTER>
+	<FORM ACTION="GetName" METHOD="POST">
+	<!-- when typing in browsers only use project name and /htmlfilename 
+	Leave out the action mention in form and java file defined the form 
+	in this case is redirecting to the  html in the java file
+	http://localhost:8080/UsingHTMLAdvanced/index.html
+	-->
+	
 			First name: 
 			<INPUT TYPE="TEXT" NAME="firstName" VALUE="J. Random"><BR>
 			Last name: 
-			<INPUT TYPE="TEXT" NAME="lastName" VALUE="Hacker"> <P>
+			<INPUT TYPE="TEXT" NAME="lastName" VALUE="Hacker">
 				<INPUT TYPE="SUBMIT">
-				<!-- Press this to submit form -->
-		</CENTER>
 	</FORM>
 </body>
 </html>

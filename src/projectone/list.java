@@ -1,6 +1,5 @@
 package projectone;
 
-import coreServlet.ServletUtilities;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -22,7 +21,6 @@ public class list extends HttpServlet{
 		// Always define response first
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String title = "JC";
 
 		out.println("<!DOCTYPE html>");
         out.println("<head><title> Test </title></head>");
