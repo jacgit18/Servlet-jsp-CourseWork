@@ -17,19 +17,41 @@ public class Formtesting extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		 String a = request.getParameter("first");
-	        String b = request.getParameter("second");
+		  String a = request.getParameter("username");
+	        String b = request.getParameter("password");
+	        String c = request.getParameter("email");
 
-	        int sum = Integer.parseInt(a) + Integer.parseInt(b);
+	        String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + "Transitional//EN\">\n";
 
-	        response.setContentType("text/html");
+			response.setContentType("text/html");
 	        PrintWriter out = response.getWriter();
-	        out.println("<html><head><title>Add</title></head><body>");
-
-	        out.println("<p>The sum of " + a + " and " + b
-	                + " is " + sum + ".</p>");
-
-	        out.println("</body></html>");
+	        
+	        String errormsg = "password required";
+			if ((a == null) || (b.trim().equals("") || c.trim().equals(""))) {
+				out.println("enter info");
+	            //response.sendRedirect( "invalid.html" );
+	            //return ;
+	        }		
+		
+		
+			
+        
+   
+        
+        
+        out.println("<p>Username: "
+                + request.getParameter("username") + "</p>");
+        out.println("<p>Password: "
+                + request.getParameter("password")
+                + errormsg + "</p> " );
+        out.println("<p>Email: "
+                + request.getParameter("email") + "</p>");
+        
+      
+        out.println("<p>The username is " + a + " and password entered is " + b
+                + ".</p>");
+        
+        out.println("</body></html>");
 	    }
 	
 	
