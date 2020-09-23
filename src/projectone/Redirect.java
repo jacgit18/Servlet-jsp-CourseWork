@@ -12,7 +12,7 @@ public class Redirect extends HttpServlet {
                     HttpServletResponse response)
       throws ServletException, IOException {
     String firstPage = "SecondPg.html";
-    String referer = request.getHeader("Referer");
+    String referer = request.getHeader("Referer");// referer contains address of previous ul
     if ((referer == null) ||
         (!referer.contains(firstPage))) {
       response.sendRedirect(firstPage);
