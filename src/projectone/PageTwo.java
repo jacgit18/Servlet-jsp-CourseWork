@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-@WebServlet("/page-two")
+@WebServlet("/pg-two")
 public class PageTwo extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request,
@@ -37,6 +37,8 @@ public class PageTwo extends HttpServlet {
                   "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" +
                   "<BODY BGCOLOR=\"#FDF5E6\">\n" +
                   "<H1 ALIGN=\"CENTER\">" + title + "</H1>\n" +
+                  "Click <A HREF=\"pg-one\">here</A>\n" +
+                  "to return to page one.\n" +
                   "</BODY></HTML>");
     }
   }
