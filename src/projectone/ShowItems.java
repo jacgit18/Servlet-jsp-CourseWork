@@ -12,38 +12,53 @@ public class ShowItems extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		synchronized (session) {
-			PrintWriter out = response.getWriter();
 
 			@SuppressWarnings("unchecked")
-			List<SimpleItem> previousItems = (List<SimpleItem>) session.getAttribute("previousItems");
+			List<ArrayList<String>> previousItems = (List<ArrayList<String>>) session.getAttribute("previousItems");
 
-		
 
 			if (previousItems == null) {
 
-				previousItems = new ArrayList<SimpleItem>();
+				previousItems = new ArrayList<ArrayList<String>>();
 
 				session.setAttribute("previousItems", previousItems);
 
 			}
-			String newItem = request.getParameter("newItem");
-			String itemQty = request.getParameter("itemQty");
+			String[] allnewItem = request.getParameterValues("newItem");
+			String[] allitemQty = request.getParameterValues("itemQty");
+//			request.getParameterMap();
 
 			// out.println(previousItems);
 
-			if ((newItem != null) && (!newItem.trim().equals(""))) {
-				SimpleItem item = findItem(newItem, previousItems);
-				if (item != null) {
-					item.incrementItemCount();
-					// something here
-				} else {
-					item = new SimpleItem(newItem);
-
-					previousItems.add(item);
+			if (allnewItem.length == 1) {
+				String newItem = allnewItem[0];
+				String itemQty = allitemQty[0];
+				
+				if ((itemQty == null) || (newItem.trim().equals("")))
+					itemQty = "0";
+				if ((newItem != null) && (!newItem.trim().equals(""))){
+					previousItems.add((ArrayList<String>) Arrays.asList(newItem,itemQty));
 				}
+			} else {
+				String itemQty = "0"; 
+				
+				for (int i =0; i<allnewItem.length; i++) {
+					if ((allnewItem[i] != null) && (!allnewItem[i].trim().equals(""))){
+						ArrayList<String> arySt = new ArrayList<String>();
+						arySt.add(allnewItem[i]);
+						itemQty =  allitemQty[i];
+						if ((itemQty == null) || (itemQty.trim().equals("")));
+						itemQty = "0";
+						arySt.add(itemQty);
+						previousItems.add(arySt);
+						
+					   }
+					
+					}
 			}
 			
 			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
 			String title = "Items Purchased";
 			String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + "Transitional//EN\">\n";
 			out.println(docType + "<HTML>\n" + "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n"
@@ -52,26 +67,23 @@ public class ShowItems extends HttpServlet {
 
 				out.println("<I>No items</I>");
 			} else {
-				out.println("<UL>");
-				for (SimpleItem item : previousItems) {
+				int totalQty = 0;
+				for(ArrayList<String> item : previousItems){
+					out.println("<UL>");
+					out.println(item.get(0)+ "");
+					out.println(item.get(1));
+					totalQty = totalQty + Integer.parseInt(item.get(1));
 
-					out.println("  <LI>" + item);
+					out.println("</UL>");
 
 				}
-				out.println("</UL>");
+				out.println("Total Quantity: " +totalQty);
+
 			}
 			out.println("</BODY></HTML>");
 		}
 	}
 
 	
-	private SimpleItem findItem(String newItem, List<SimpleItem> previousItems) {
-		for (SimpleItem item : previousItems) {
-			if (item.getItemName().equals(newItem)) {
-				return (item);
-			}
-		}
-		return (null);
-	}
 }
 	
