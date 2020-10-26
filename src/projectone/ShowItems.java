@@ -15,68 +15,85 @@ public class ShowItems extends HttpServlet {
     HttpSession session = request.getSession();
     synchronized(session) {
     
-    
-      @SuppressWarnings("unchecked")
-      List<ArrayList<String>> previousItems =
-    		  (List<ArrayList<String>>)session.getAttribute("previousItems");
-    		  
-    		  
-      if (previousItems == null) {
-        previousItems = new ArrayList<ArrayList<String>>();
-        session.setAttribute("previousItems", previousItems);
-      }
-      
-      String[] allNewItems = request.getParameterValues("newItem");
-      String[] allItemQtys = request.getParameterValues("itemQty");
-      
-      if (allNewItems.length == 1){
-    	  String newItem = allNewItems[0];
-    	  String itemQty = allItemQtys[0];
-    	  if ((itemQty == null) || (newItem.trim().equals("")))
-    		  itemQty ="0";
-    	  if ((itemQty != null) && (!newItem.trim().equals(""))){
-    		  previousItems.add((ArrayList<String>) Arrays.asList(newItem, itemQty));
-    	  }
-      }else{
-    	  String itemQty = "0";
-    	  for(int i=0; i<allNewItems.length; i++){
-    		  if ((allNewItems[i] != null) && (!allNewItems[i].trim().equals(""))){
-    			  ArrayList<String> arySt = new ArrayList<String>();
-    			  
-    			  arySt.add(allNewItems[i]);
-    			  itemQty = (allItemQtys[i]);
-    			  if ((itemQty == null) || (itemQty.trim().equals("0")))
-    				  itemQty = "0";
-    			  arySt.add(itemQty);
-    			  previousItems.add(arySt);
-    		  }
-    	  }
-      }
-      response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
-      String title = "Items Purchased";
-      String docType =
-        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
-        "Transitional//EN\">\n";
-      out.println(docType +
-                  "<HTML>\n" +
-                  "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" +
-                  "<BODY BGCOLOR=\"#FDF5E6\">\n" +
-                  "<H1>" + title + "</H1>");
-      if (previousItems.size() == 0) {
-        out.println("<I>No items</I>");
-      } else {
-        int totalQty = 0;
-        for(ArrayList<String> item: previousItems) {
-        	out.println("<UL>");
-        	out.println(item.get(0)+" ");
-        	out.println(item.get(1));
-        	totalQty = totalQty + Integer.parseInt(item.get(1));
-        	out.println("</UL>");
-        }
-        out.println("Total Quantity: "+totalQty);        
-      }
-      out.println("</BODY></HTML>");
-    }
-  }
-}
+    	 @SuppressWarnings("unchecked")
+         List<String> previousItems = (List<String>)session.getAttribute("previousItems");
+         
+         if (previousItems == null) {
+           previousItems = new ArrayList<String>();
+           session.setAttribute("previousItems", previousItems);
+         }
+         
+         
+         
+         
+         
+         
+         String newItem = request.getParameter("newItem");
+         String newQty = request.getParameter("itemQty");
+         
+         
+         // potential 
+         /*
+          * request.getParameterMap()
+          * maps and enummeration are similar maps are newer
+          */
+         
+         
+//         Enumeration<String> paramNames =
+//        		 request.getParameterNames();
+//        		 while(paramNames.hasMoreElements()) {
+//        		 String paramName = (String)paramNames.nextElement();
+//        		 out.print("<TR><TD>" + paramName + "\n<TD>");
+//        		 String[] paramValues =
+//        		 request.getParameterValues(paramName);
+//        		 if (paramValues.length == 1) {
+//        		 String paramValue = paramValues[0];
+//        		 if (paramValue.length() == 0)
+//        		 out.println("<I>No Value</I>");
+//        		 else
+//        		 out.println(paramValue);
+//        		 } else {
+//        		 out.println("<UL>");
+//        		 for(int i=0; i<paramValues.length; i++) {
+//        		 out.println("<LI>" + paramValues[i]);
+//        		 }
+//        		 out.println("</UL>");
+         
+         if ((newItem != null) && (!newItem.trim().equals(""))) {
+           previousItems.add(newItem);
+      	 // work here
+           
+         }
+    	 // work here
+
+         
+         
+         
+         
+         
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         String title = "Items Purchased";
+         String docType =
+           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
+           "Transitional//EN\">\n";
+         out.println(docType +
+                     "<HTML>\n" +
+                     "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" +
+                     "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+                     "<H1>" + title + "</H1>");
+         if (previousItems.size() == 0) {
+           out.println("<I>No items</I>");
+         } else {
+        	 
+        	 // work here
+           out.println("<UL>");
+           for(String item: previousItems) {
+             out.println("  <LI>" + item);
+           }
+           out.println("</UL>");
+         }
+         out.println("</BODY></HTML>");
+       }
+     }
+   }
