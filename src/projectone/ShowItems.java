@@ -95,5 +95,7 @@ public class ShowItems extends HttpServlet {
          }
          out.println("</BODY></HTML>");
        }
+    
+    
      }
    }
