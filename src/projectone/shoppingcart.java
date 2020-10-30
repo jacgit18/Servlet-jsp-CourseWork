@@ -11,8 +11,13 @@ public class shoppingcart extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
+		
 		synchronized (session) {
+			
+
 			/*
 			 * 
 			 * (15 pts) Order button will move to the ShoppingCart page (ShoppingCart.java)
@@ -25,10 +30,7 @@ public class shoppingcart extends HttpServlet {
 			 * (2 pts) System should update their quantity from each textbox and only
 			 * update if the quantity is not blank. 
 			 * 
-			 * (4 pts) The ShoppingCart page only works
-			 * for IE (check word "Trident" for IE or not). If not, show error page using
-			 * HTML standard error code "HttpServletResponse.SC_HTTP_VERSION_NOT_SUPPORTED"
-			 * and your message "Only Microsoft IE browser is working for this site." 
+			 * 
 			 * 
 			 * (4 pts) You must block user going directly to shoppingCart.java if user is not
 			 * coming from the product.html page. If they do, send user back to the
@@ -43,6 +45,18 @@ public class shoppingcart extends HttpServlet {
 			
 //			request.getContextPath()
 			
+//			 String countString =
+//				      CookieUtilities.getCookieValue(request,
+//				                                     "accessCount",
+//				                                     "1");
+//				    int count = 1;
+//				    try {
+//				      count = Integer.parseInt(countString);
+//				    } catch(NumberFormatException nfe) { }
+//				    LongLivedCookie c =
+//				      new LongLivedCookie("accessCount",
+//				                          String.valueOf(count+1));
+//				    response.addCookie(c);
 			
 			String productListPath = "http://localhost:8080/MYCookiesHW/ProductList.html";
 			String productfile = "ProductList.html";
@@ -51,23 +65,60 @@ public class shoppingcart extends HttpServlet {
 			boolean ProductPathChecker = request.getServletPath().contains(productfile);
 			boolean ShopPathChecker = request.getServletPath().contains(Shopfile);
 			
-			 if(ProductPathChecker != ShopPathChecker){
-				 System.out.println("On Path");
-//			      request.getRequestDispatcher(productfile).forward(request, response);  
-			} else if(request.getServletPath().equals("/shopping-cart")) {
-				
-			}
+	         String [] newQty = request.getParameterValues("itemQty");
+
 			
+//			 if(ProductPathChecker != ShopPathChecker){
+//				 System.out.println("On Path");
+////			      request.getRequestDispatcher(productfile).forward(request, response);  
+//			} else if(request.getServletPath().equals("/shopping-cart")) {
+//				
+//			}
+//			
 //			if(productListPath == null) {
 //				
 //			}
 
 			String title = "MyCart";
-
+			
+			
+           
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + "Transitional//EN\">\n";
+//			  response.setContentType("application/vnd.ms-excel");
+//			     out.println("\titemID\tName\tQty");
+//			     out.println("123\tOrange\t10");
+//			     out.println("124\tApple\t1");
+//			     out.println("125\tBanana\t3");
+//			     out.println("\tTotal Qty\t=SUM(C2:C5)");
+			 String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + "Transitional//EN\">\n";
 			
+			
+			
+//			if (request.getParameter("previewButton") != null) {
+//				 showPreview(request, out);
+//				 } else {
+//				 storeResume(request);
+//				 showConfirmation(request, out);
+//				 }
+//				 }
+//			
+			 
+			 /*
+			  * (4 pts) The ShoppingCart page only works
+			 * for IE (check word "Trident" for IE or not). If not, show error page using
+			 * HTML standard error code "HttpServletResponse.SC_HTTP_VERSION_NOT_SUPPORTED"
+			 * and your message "Only Microsoft IE browser is working for this site." 
+			  */
+			    String referer = request.getHeader("Referer");// referer contains address of previous ul
+			    String userAgent = request.getHeader("User-Agent");
+			    if ((userAgent != null) && (!userAgent.contains("MSIE"))) {
+			         out.println("<p>" + "" + "</p>");
+
+			      response.sendRedirect(productListPath);
+
+			      
+			    } else {
 	         out.println(docType +
                      "<HTML>\n" +
                      "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" +
@@ -95,13 +146,20 @@ public class shoppingcart extends HttpServlet {
 	         
 	         
          out.println("</BODY></HTML>");
+			    }
        
 		}
 
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) {
-		doGet(request, response);
+
+//	public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		doPost(request, response);
+//		doGet(request, response);
+
+
 	}
 
 }
